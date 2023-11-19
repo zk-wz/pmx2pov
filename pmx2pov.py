@@ -1,14 +1,17 @@
-from pmx_read import *
-from pov_writer import *
+import pmx_read
+import pov_writer
+import os
 
 filepath = r"pmx2pov\pmx\YYB Hatsune Miku_10th\YYB Hatsune Miku_10th_v1.02.pmx"
+folderpath = r"E:\projects\programming\py\pmx2pov\pmx\YYB Hatsune Miku_10th"
 
-pmx = PmxImporter.load(filepath)
+pmx = pmx_read.PmxImporter.load(filepath)
 
 code = ""
-code += PovWriter.write_camera([0, 10, -25], [0, 10, 0])
-code += PovWriter.write_light([0, 20, -10], [1, 1, 1])
-code += PovWriter.write_mesh(pmx.Vertices, pmx.Faces)
+code += pov_writer.PovWriter.write_texture(pmx.Textures, folderpath)
+code += pov_writer.PovWriter.write_camera([0, 10, -25], [0, 10, 0])
+code += pov_writer.PovWriter.write_light([0, 20, -10], [1, 1, 1])
+code += pov_writer.PovWriter.write_mesh(pmx)
 
 file_name = "test.pov"
 povfilepath = f"pmx2pov\pov\{file_name}"

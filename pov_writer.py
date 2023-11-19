@@ -1,7 +1,27 @@
+import os
 
 class PovWriter:
     def __init__() -> None:
         pass
+
+    @staticmethod
+    def write_texture(texture_list, folderpath):
+        code = ""
+        for i in range(len(texture_list)):
+            tex = os.path.join(folderpath, texture_list[i])
+            ext_name = os.path.splitext(tex)[1][1:]
+            code += "#declare tex"+str(i)+" = texture {\n"
+            code += "  pigment {\n"
+            code += "    image_map {\n"
+            code += f"      {ext_name} \"{tex}\"\n"
+            code += "      interpolate 2\n"
+            code += "      once\n"
+            code += "    }\n"
+            code += "  }\n"
+            code += "}\n"
+        return code
+            
+        
 
     @staticmethod
     def write_camera(location, look_at):
@@ -22,7 +42,11 @@ class PovWriter:
         return code
     
     @staticmethod
-    def write_mesh(pmxvertices, faces):
+    def write_mesh(pmx):
+        pmxvertices = pmx.Vertices
+        faces = pmx.Faces
+        texture_list = pmx.Textures
+
         code = ""
         code += "mesh2 {\n"
         code += "  vertex_vectors {\n"
@@ -45,6 +69,8 @@ class PovWriter:
         for f in faces:
             code += f"    <{f[0]}, {f[1]}, {f[2]}>,\n"
         code += "  }\n"
+        # for i in range(len(texture_list)):
+        #     code += f"  texture {{ tex{i} }}\n"
         code += "  pigment { rgb <1, 1, 1> }\n"
         code += "}\n"
         return code
