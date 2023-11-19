@@ -1,0 +1,5 @@
+*
+!.gitignore
+!pmx_importer.py
+!pmx2pov.py
+!README.md
