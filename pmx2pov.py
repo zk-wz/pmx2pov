@@ -1,16 +1,18 @@
-from pmx_importer import *
-pmx = PmxImporter.load(r"CGassignment\登门喜鹊泠鸢yousa-ver2.0\泠鸢yousa登门喜鹊153cm-Apose2.1完整版.pmx")
+from pmx_read import *
+from pov_writer import *
 
-vertices = []
-normals = []
-faces = [0,1,2,3]
-uvs = []
-for i in range(4):
-    vertices.append(pmx.Vertices[i].Position)
-    normals.append(pmx.Vertices[i].Normal)
-    uvs.append(pmx.Vertices[i].UV)
+filepath = r"pmx2pov\pmx\YYB Hatsune Miku_10th\YYB Hatsune Miku_10th_v1.02.pmx"
 
-print("Vertices:", vertices)
-print("Normals:", normals)
-print("Faces:", faces)
-print("UVs:", uvs)
+pmx = PmxImporter.load(filepath)
+
+code = ""
+code += PovWriter.write_camera([0, 10, -25], [0, 10, 0])
+code += PovWriter.write_light([0, 20, -10], [1, 1, 1])
+code += PovWriter.write_mesh(pmx.Vertices, pmx.Faces)
+
+file_name = "test.pov"
+povfilepath = f"pmx2pov\pov\{file_name}"
+with open(povfilepath, mode="w") as f:
+    f.write(code)
+print(f"Saved to {povfilepath}")
+
