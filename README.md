@@ -9,3 +9,6 @@ Import mikumikudance pmx file to povray renderer using python.
 - [ ] shader integration
 - [ ] skeleton import
 - [ ] weight import
+
+Source:
+![PMX File Format Specifications](https://gist.github.com/felixjones/f8a06bd48f9da9a4539f)
