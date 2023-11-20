@@ -257,11 +257,16 @@ class PmxImporter:
 
 
 if __name__ == '__main__':
-    pmx = PmxImporter.load(r"CGassignment\登门喜鹊泠鸢yousa-ver2.0\泠鸢yousa登门喜鹊153cm-Apose2.1完整版.pmx")
+    pmx = PmxImporter.load(r"pmx2pov\pmx\YYB Hatsune Miku_10th\YYB Hatsune Miku_10th_v1.02.pmx")
     PmxImporter.print_text_info("Model name(local)", pmx.Header.ModelNameLocal)
     PmxImporter.print_text_info("Model name(universal)", pmx.Header.ModelNameUniversal)
     PmxImporter.print_text_info("Comments(local)", pmx.Header.CommentsLocal)
     PmxImporter.print_text_info("Comments(universal)", pmx.Header.CommentsUniversal)
+    sum = 0
+    for mat in pmx.Materials:
+        sum += mat.SurfaceCount
+    print(sum)
+    print(len(pmx.Faces*3))
 
 
 
