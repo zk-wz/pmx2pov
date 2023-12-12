@@ -26,23 +26,20 @@ class PovWriter:
         return code
 
     @staticmethod
-    def write_texture(pmx, folderpath):
+    def write_texture(pmx, folderpath, s):
         texture_list = pmx.Textures
         material_list = pmx.Materials
         code = ""
         for i in range(len(material_list)):
             tex = os.path.join(folderpath, texture_list[material_list[i].TextureIndex])
             ext_name = os.path.splitext(tex)[1][1:]
-            code += "#declare tex"+str(i)+" = texture {\n"
+            code += "#declare tex"+s+str(i)+" = texture {\n"
             code += "  uv_mapping\n"
             code += "  pigment {\n"
-            # code += "  color rgb <1, 1, 1>\n"
             code += "    image_map {\n"
             code += f"      {ext_name} \"{tex}\"\n"
-            code += "      premultiplied 0\n"
             code += "      map_type 0\n"
             code += "      interpolate 2\n"
-            # code += "      once\n"
             code += "    }\n"
             code += "  }\n"
             code += "}\n"
@@ -69,7 +66,7 @@ class PovWriter:
         return code
     
     @staticmethod
-    def write_mesh(pmx):
+    def write_mesh(pmx,s):
         pmxvertices = pmx.Vertices
         faces = pmx.Faces
         material_list = pmx.Materials
@@ -80,7 +77,7 @@ class PovWriter:
         for mat_index in range(len(material_list)):
             print_progressbar(face_count, len(faces))
             mat = material_list[mat_index]
-            code += "#declare pmx"+str(mat_index)+" = mesh2 {\n"
+            code += "#declare pmx"+s+str(mat_index)+" = mesh2 {\n"
             code += "  vertex_vectors {\n"
             code += f"    {mat.SurfaceCount},\n"
             for i in range(int(mat.SurfaceCount/3)):
@@ -109,14 +106,14 @@ class PovWriter:
             code += "  }\n"
             # code += "  uv_mapping\n"
             code += "  texture {\n"
-            code += f"    tex{mat_index}\n"
+            code += f"    tex{s}{mat_index}\n"
             code += "  }\n"
             code += "}\n"
             face_count += int(mat.SurfaceCount/3)
         code += "union {\n"
         # for i in range(1):
         for i in range(len(material_list)):
-            code += f"  object {{ pmx{i} }}\n"
+            code += f"  object {{ pmx{s}{i} }}\n"
         code += "}\n"
                     
             
