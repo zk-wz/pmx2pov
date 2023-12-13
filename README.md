@@ -1,6 +1,9 @@
 # Pmx2Povray
 Import mikumikudance pmx file to povray renderer using python.
 
+# Usage
+Example code is in pmx2pov.py, and all function is defined in pov_writer.py.
+
 ✨Todo list:
 - [x] pmx file read
 - [x] model import
