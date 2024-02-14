@@ -13,5 +13,5 @@ Example code is in pmx2pov.py, and all function is defined in pov_writer.py.
 - [ ] skeleton import
 - [ ] weight import
 
-Source:
+Reference:
 - [PMX File Format Specifications](https://gist.github.com/felixjones/f8a06bd48f9da9a4539f)
